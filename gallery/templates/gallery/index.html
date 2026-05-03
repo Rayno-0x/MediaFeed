@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% load static %} {% block full_width %}
+{% extends 'base.html' %} {% load cloudinary %} {% load static %} {% block
+full_width %}
 <style>
   .g-background {
     background-image:
@@ -25,12 +26,9 @@
       {% for p in photos %}
       <div class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm">
-          <img
-            style="height: 250px; object-fit: cover"
-            src="{{ p.image.url }}"
-            class="card-img-top"
-            alt="Photo {{ p.id }}"
-          />
+          {% cloudinary p.image format="auto" quality="auto" width=800
+          crop="scale" class="card-img-top" style="height: 250px; object-fit:
+          cover" alt="Gallery Photo" %}
           <div class="card-body">
             <p class="card-text text-muted small">{{ p.created_at }}</p>
           </div>
