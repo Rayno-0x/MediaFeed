@@ -1,0 +1,74 @@
+{% extends 'base.html' %} {% load static %} {% block full_width %}
+<style>
+  .g-background {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url("{% static 'images/background.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(10px);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+</style>
+<div class="g-background text-white text-center">
+  <div class="container">
+    <div class="container mt-4">
+      <h1 class="mb-4">Music</h1>
+
+      <div class="row">
+        {% for song in songs %}
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm">
+            {% if song.cover_image %}
+            <img
+              src="{{ song.cover_image.url }}"
+              class="card-img-top"
+              alt="{{ song.title }}"
+              style="height: 250px; object-fit: cover"
+            />
+            {% else %}
+            <div
+              class="card-img-top bg-secondary d-flex align-items-center justify-content-center"
+              style="height: 250px"
+            >
+              <span class="text-light">No Cover Art</span>
+            </div>
+            {% endif %}
+
+            <div class="card-body">
+              <h5 class="card-title">{{ song.title }}</h5>
+              <h6 class="card-subtitle mb-3 text-muted">
+                by {{ song.artist }}
+              </h6>
+
+              {% if song.audio_file %}
+              <audio controls class="w-100">
+                <source src="{{ song.audio_file.url }}" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+              {% endif %}
+
+              <p class="card-text mt-3">
+                <small class="text-muted">{{ song.uploaded_at|date }}</small>
+              </p>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center mt-5">
+          <h3>No songs have been uploaded yet.</h3>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endblock %}
+  </div>
+</div>

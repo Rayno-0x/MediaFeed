@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% load static %} {% block full_width %}
+<style>
+  .hero-background {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url("{% static 'images/background.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+<div class="hero-background text-white text-center">
+  <div class="container">
+    <h1 class="display-3 font-weight-bold mb-4 shadow-sm">
+      Welcome to MediaFeed
+    </h1>
+    <p class="lead mb-5">
+      Personal hub for discovering photos, reading articles, and listening to
+      music.
+    </p>
+
+    <div class="mt-4">
+      <a href="/gallery/" class="btn btn-primary btn-lg mx-2 px-4 shadow"
+        >View Gallery</a
+      >
+      <a
+        href="/articles/"
+        class="btn btn-light btn-lg mx-2 px-4 shadow text-dark"
+        >Read Articles</a
+      >
+      <a href="/music/" class="btn btn-success btn-lg mx-2 px-4 shadow"
+        >Listen to Music</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}

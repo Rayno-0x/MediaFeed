@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% load static %} {% block full_width %}
+<style>
+  .g-background {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      url("{% static 'images/background.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(10px);
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+</style>
+<div class="g-background text-white text-center">
+  <div class="container">
+    <h1 class="mb-4">Photo Gallery</h1>
+    <div class="row">
+      {% for p in photos %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <img
+            style="height: 250px; object-fit: cover"
+            src="{{ p.image.url }}"
+            class="card-img-top"
+            alt="Photo {{ p.id }}"
+          />
+          <div class="card-body">
+            <p class="card-text text-muted small">{{ p.created_at }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endblock %}
+  </div>
+</div>
